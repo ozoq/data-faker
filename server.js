@@ -1,4 +1,5 @@
-const app = require("./server/app");
+import app from "./server/app.js";
+
 const PORT = process.env.PORT || 8080;
 
 async function init() {
