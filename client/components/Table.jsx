@@ -8,7 +8,7 @@ function Table({ seed = 0, locale = "pl", errors = 0 }) {
   const loaderRef = useRef();
 
   async function lazy() {
-    setRecords([...records, ...(await loadRecords(10))]);
+    setRecords([...records, ...(await loadRecords(10, records.length))]);
   }
 
   async function swap() {
@@ -20,18 +20,18 @@ function Table({ seed = 0, locale = "pl", errors = 0 }) {
     const swapSize = records.length - topSeenIndex;
     setRecords([
       ...records.slice(0, -swapSize),
-      ...(await loadRecords(swapSize)),
+      ...(await loadRecords(swapSize, topSeenIndex)),
     ]);
     listRef.scrollToItem(records.length - swapSize, "start");
   }
 
-  async function loadRecords(amount) {
+  async function loadRecords(amount, fromIndex) {
     return await post("/api/getFakePage", {
       seed,
       locale,
       errors,
       amount: amount,
-      from: records.length,
+      from: fromIndex,
     });
   }
 
