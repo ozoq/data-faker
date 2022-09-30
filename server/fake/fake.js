@@ -25,6 +25,23 @@ const addAddress = (faker) => (record) => ({
 });
 
 /**
+ * To a record, adds a field with a phone number
+ */
+const addPhone = (faker) => (record) => ({
+  ...record,
+  phone: faker.phone.number(),
+});
+
+/**
+ * Add ID to the record which is the seed, convinient for referencing.
+ * Not errorified.
+ */
+const addId = (seed) => (record) => ({
+  ...record,
+  id: seed,
+});
+
+/**
  * The most important function in this pseudo-module
  * Generates a random record,
  *  in a provided locale,
@@ -38,6 +55,8 @@ export default function fake({ locale, seed, errors }) {
   return compose(
     addName(faker),
     addAddress(faker),
-    errorify(faker)(errors)
+    addPhone(faker),
+    errorify(faker)(errors),
+    addId(seed)
   )({});
 }

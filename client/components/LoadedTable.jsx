@@ -21,10 +21,10 @@ function Record({ record, index, style }) {
   return (
     <Row style={style}>
       <Cell span={1}>{index}</Cell>
-      <Cell span={1}>{(12345 * index) % 10000}</Cell>
+      <Cell span={1}>{record.id}</Cell>
       <Cell span={2}>{record.name}</Cell>
       <Cell span={2}>{record.address}</Cell>
-      <Cell span={2}>{"+ 48 324 654 343"}</Cell>
+      <Cell span={2}>{record.phone}</Cell>
     </Row>
   );
 }
