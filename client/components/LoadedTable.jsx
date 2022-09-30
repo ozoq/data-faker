@@ -51,22 +51,9 @@ function Wrapper({ children }) {
   );
 }
 
-const LoadedTable = React.forwardRef(({ records, fetchMore }, ref) => {
-  const Item = ({ index, style }) => {
-    return !isItemLoaded(index) ? (
-      <LoadingRecord style={style} />
-    ) : (
-      <Record record={records[index]} style={style} />
-    );
-  };
-
-  const isItemLoaded = (index) => index < records.length;
-
-  const itemCount = records.length + 1;
-
-  return (
-    <Wrapper>
-      <Head />
+const Body = React.forwardRef(
+  ({ isItemLoaded, itemCount, fetchMore, Item }, ref) => {
+    return (
       <Paper sx={{ flex: 1 }} withBorder>
         <AutoSizer>
           {({ height, width }) => (
@@ -93,6 +80,25 @@ const LoadedTable = React.forwardRef(({ records, fetchMore }, ref) => {
           )}
         </AutoSizer>
       </Paper>
+    );
+  }
+);
+
+const LoadedTable = React.forwardRef(({ records, fetchMore }, ref) => {
+  const isItemLoaded = (index) => index < records.length;
+  const itemCount = records.length + 1;
+  const Item = ({ index, style }) => {
+    return !isItemLoaded(index) ? (
+      <LoadingRecord style={style} />
+    ) : (
+      <Record record={records[index]} style={style} />
+    );
+  };
+
+  return (
+    <Wrapper>
+      <Head />
+      <Body {...{ isItemLoaded, itemCount, fetchMore, Item, ref }} />
     </Wrapper>
   );
 });

@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import post from "../utils/post";
 import LoadedTable from "./LoadedTable";
 
+function getTopIndexInReactWindow(windowRef) {
+  return Math.round(windowRef.state.scrollOffset / windowRef.props.itemSize);
+}
+
 function Table({ seed = 0, locale = "pl", errors = 0, records, setRecords }) {
   const [fetching, setFetching] = useState(false);
   const loaderRef = useRef();
@@ -12,16 +16,13 @@ function Table({ seed = 0, locale = "pl", errors = 0, records, setRecords }) {
 
   async function swap() {
     if (!loaderRef.current) return;
-    const listRef = loaderRef.current._listRef;
-    const topSeenIndex = Math.round(
-      listRef.state.scrollOffset / listRef.props.itemSize
-    );
+    const topSeenIndex = getTopIndexInReactWindow(loaderRef.current._listRef);
     const swapSize = records.length - topSeenIndex;
     setRecords([
       ...records.slice(0, -swapSize),
       ...(await loadRecords(swapSize, topSeenIndex)),
     ]);
-    listRef.scrollToItem(records.length - swapSize, "start");
+    loaderRef.current._listRef.scrollToItem(records.length - swapSize, "start");
   }
 
   async function loadRecords(amount, fromIndex) {
