@@ -20,9 +20,6 @@ function generateFakePage({ locale, seed, errors, from, amount }) {
   const page = [];
   for (let i = from; i < from + amount; i++) {
     const localSeed = advanceSeed(seed, i);
-    console.log(
-      `Generating single record with: seed: ${seed}, localSeed: ${localSeed}`
-    );
     page.push({
       ...fake({
         locale,
