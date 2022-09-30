@@ -18,6 +18,10 @@ const addAddress = (faker) => (record) => ({
   ...record,
   address: randomArrayElement(faker)([
     () =>
+      `${faker.address.city()}, ${faker.address.streetAddress()} ${faker.address.buildingNumber()} ${faker.address.secondaryAddress()}`,
+    () =>
+      `${faker.address.state()}, ${faker.address.city()}, ${faker.address.street()} ${faker.address.buildingNumber()}, ${faker.address.zipCode()}`,
+    () =>
       `${faker.address.city()}, ${faker.address.street()} ${faker.address.buildingNumber()}`,
     () =>
       `${faker.address.state()}, ${faker.address.city()}, ${faker.address.street()} ${faker.address.buildingNumber()}`,

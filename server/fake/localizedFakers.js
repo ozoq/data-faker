@@ -27,5 +27,7 @@ fakerPL.phone.number = () => {
     () => fakerPL_phone_number_original(),
     () => fakerPL_phone_number_original("###-###-###"),
     () => fakerPL_phone_number_original("#########"),
+    () => fakerPL_phone_number_original("+48 ### ### ###"),
+    () => fakerPL_phone_number_original("+48-###-###-###"),
   ])();
 };
