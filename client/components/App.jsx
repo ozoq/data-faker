@@ -14,7 +14,7 @@ const AppStyle = (theme) => ({
 
 function App() {
   const [seed, setSeed] = useState(0);
-  const [errors, setErrors] = useState(5);
+  const [errors, setErrors] = useState(0);
   const [region, setRegion] = useState("pl");
 
   return (
