@@ -1,7 +1,8 @@
-import { AppShell, Group } from "@mantine/core";
+import { AppShell, Button, Group } from "@mantine/core";
 import { useState } from "react";
 import Table from "./Table";
 import { ErrorsInput, RegionInput, SeedInput } from "./inputs";
+import { CSVLink } from "react-csv";
 
 const AppStyle = (theme) => ({
   main: {
@@ -13,6 +14,7 @@ const AppStyle = (theme) => ({
 });
 
 function App() {
+  const [records, setRecords] = useState([]);
   const [seed, setSeed] = useState(0);
   const [errors, setErrors] = useState(0);
   const [region, setRegion] = useState("pl");
@@ -23,8 +25,18 @@ function App() {
         <ErrorsInput errors={errors} setErrors={setErrors} />
         <SeedInput seed={seed} setSeed={setSeed} />
         <RegionInput region={region} setRegion={setRegion} />
+
+        <CSVLink data={records} target="_blank" filename="fakedata.csv">
+          <Button>Download CSV</Button>
+        </CSVLink>
       </Group>
-      <Table seed={seed} errors={errors} locale={region} />
+      <Table
+        seed={seed}
+        errors={errors}
+        locale={region}
+        records={records}
+        setRecords={setRecords}
+      />
     </AppShell>
   );
 }

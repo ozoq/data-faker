@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import post from "../utils/post";
 import LoadedTable from "./LoadedTable";
 
-function Table({ seed = 0, locale = "pl", errors = 0 }) {
-  const [records, setRecords] = useState([]);
+function Table({ seed = 0, locale = "pl", errors = 0, records, setRecords }) {
   const [fetching, setFetching] = useState(false);
   const loaderRef = useRef();
 

@@ -23,13 +23,14 @@ function generateFakePage({ locale, seed, errors, from, amount }) {
     console.log(
       `Generating single record with: seed: ${seed}, localSeed: ${localSeed}`
     );
-    page.push(
-      fake({
+    page.push({
+      ...fake({
         locale,
         seed: localSeed,
         errors,
-      })
-    );
+      }),
+      index: i,
+    });
   }
   return page;
 }

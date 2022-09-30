@@ -17,10 +17,10 @@ function Head() {
   );
 }
 
-function Record({ record, index, style }) {
+function Record({ record, style }) {
   return (
     <Row style={style}>
-      <Cell span={1}>{index}</Cell>
+      <Cell span={1}>{record.index}</Cell>
       <Cell span={1}>{record.id}</Cell>
       <Cell span={2}>{record.name}</Cell>
       <Cell span={2}>{record.address}</Cell>
@@ -56,7 +56,7 @@ const LoadedTable = React.forwardRef(({ records, fetchMore }, ref) => {
     return !isItemLoaded(index) ? (
       <LoadingRecord style={style} />
     ) : (
-      <Record record={records[index]} style={style} index={index} />
+      <Record record={records[index]} style={style} />
     );
   };
 
