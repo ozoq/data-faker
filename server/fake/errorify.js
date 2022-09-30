@@ -63,18 +63,11 @@ const errorifyEntry = (faker) => (entry) =>
 const errorifyObject = (faker) => (initialObject) => (object) => ({
   ...object,
   ...compose(
-    getEntryByFieldName(
-      log(lengthWeightedRandomField(faker)(log(initialObject, 2)), 1)
-    ),
+    getEntryByFieldName(lengthWeightedRandomField(faker)(initialObject)),
     errorifyEntry(faker),
     entryToObject
   )(object),
 });
-
-const log = (val, msg) => {
-  console.log(val, msg);
-  return val;
-};
 
 /**
  * Exported method errorifyObject() to provided object,
